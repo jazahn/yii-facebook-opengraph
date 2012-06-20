@@ -29,6 +29,11 @@ class SFacebook extends CApplicationComponent
      */
     public $secret;
 
+  	/**
+     * @var string Facebook Application redirect
+     */
+    public $redirect;
+
     /**
      * @var bool Indicates if the CURL based @ syntax for file uploads is enabled in the PHP SDK
      */
@@ -598,4 +603,16 @@ class SFacebook extends CApplicationComponent
             return false;
         }
     }
+	
+	/**
+	 * had to add this function to deal with php's poor handling of expired access tokens
+	 *
+	 * @param string $access_token
+	 * @return runs the Facebook::setAccessToken
+	 */
+	public function setAccessToken($access_token){
+		return $this->_getFacebook()->setAccessToken($access_token);
+	}
+	
+	
 }
